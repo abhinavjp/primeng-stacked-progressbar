@@ -1,12 +1,24 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <div class="progress" style="height: 30px">
     <div class="progress-bar bg-primary w-25 p-3">Progress 15%</div>
     <div class="progress-bar bg-info w-50 p-3">Progress 35%</div>
     <div class="progress-bar bg-secondary w-25 p-3">Progress 12%</div>
     <div class="progress-bar bg-success w-50 p-3" role="">Progress 38%</div>
   </div>
+</div> -->
+
+<div *ngIf="options !== null && options !== undefined">
+  <p-progressBar [value]="options.value"></p-progressBar>
 </div>
 
-<div>
-  <p-progressBar [value]="50"></p-progressBar>
+<div
+  *ngIf="
+    multipleOptions != null &&
+    multipleOptions != undefined &&
+    multipleOptions.length > 0
+  "
+>
+  <div *ngFor="let optionItem of multipleOptions">{{optionItem | json}}
+    <p-progressBar [value]="optionItem.value" [color]="optionItem.color" [styleClass]="optionItem.styleClass"></p-progressBar>
+  </div>
 </div>
