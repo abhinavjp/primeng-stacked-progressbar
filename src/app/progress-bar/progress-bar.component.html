@@ -1,14 +1,5 @@
-<!-- <div class="container mt-5">
-  <div class="progress" style="height: 30px">
-    <div class="progress-bar bg-primary w-25 p-3">Progress 15%</div>
-    <div class="progress-bar bg-info w-50 p-3">Progress 35%</div>
-    <div class="progress-bar bg-secondary w-25 p-3">Progress 12%</div>
-    <div class="progress-bar bg-success w-50 p-3" role="">Progress 38%</div>
-  </div>
-</div> -->
-
-<div *ngIf="options !== null && options !== undefined">
-  <p-progressBar [value]="options.value"></p-progressBar>
+<div *ngIf="options !== null && options !== undefined" class="progress" [ngClass]="outerStyleClass">
+    <ng-container *ngTemplateOutlet="progressItem; context: {$implicit: options, displayValue: displayValue}"></ng-container>
 </div>
 
 <div
@@ -17,8 +8,16 @@
     multipleOptions != undefined &&
     multipleOptions.length > 0
   "
->
-  <div *ngFor="let optionItem of multipleOptions">{{optionItem | json}}
-    <p-progressBar [value]="optionItem.value" [color]="optionItem.color" [styleClass]="optionItem.styleClass"></p-progressBar>
-  </div>
+  class="progress" [ngClass]="outerStyleClass">
+  <ng-container *ngFor="let optionItem of multipleOptions">
+    <ng-container *ngTemplateOutlet="progressItem; context: {$implicit: optionItem, displayValue: displayValue}">
+
+	</ng-container>
+  </ng-container>
 </div>
+
+<ng-template #progressItem let-optionItem let-displayValue>
+	<div class="progress-bar" [style.width]="optionItem.value + '%'" [ngClass]="optionItem.styleClass"  [style.background]="optionItem.color">
+		{{displayValue ? ((optionItem.displayValue !== null && optionItem.displayValue !== undefined) ? optionItem.displayValue : optionItem.value) : '' }}
+	  </div>
+</ng-template>
