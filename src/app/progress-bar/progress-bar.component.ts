@@ -9,6 +9,8 @@ import { ProgressBarOptions } from "./progress-bar.classes";
 export class ProgressBarComponent implements OnInit {
   @Input() options: ProgressBarOptions | undefined;
   @Input() multipleOptions: ProgressBarOptions[] | undefined;
+  @Input() displayValue: boolean = true;
+  @Input() outerStyleClass: string | undefined;
   constructor() {}
 
   ngOnInit() {}
