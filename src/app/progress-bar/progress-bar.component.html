@@ -1,4 +1,4 @@
-<div *ngIf="options !== null && options !== undefined" class="progress" [ngClass]="outerStyleClass">
+<div *ngIf="options !== null && options !== undefined" class="progress-container" [ngClass]="outerStyleClass">
     <ng-container *ngTemplateOutlet="progressItem; context: {$implicit: options, displayValue: displayValue}"></ng-container>
 </div>
 
@@ -8,7 +8,7 @@
     multipleOptions != undefined &&
     multipleOptions.length > 0
   "
-  class="progress" [ngClass]="outerStyleClass">
+  class="progress-container" [ngClass]="outerStyleClass">
   <ng-container *ngFor="let optionItem of multipleOptions">
     <ng-container *ngTemplateOutlet="progressItem; context: {$implicit: optionItem, displayValue: displayValue}">
 
@@ -17,7 +17,7 @@
 </div>
 
 <ng-template #progressItem let-optionItem let-displayValue>
-	<div class="progress-bar" [style.width]="optionItem.value + '%'" [ngClass]="optionItem.styleClass"  [style.background]="optionItem.color">
+	<div class="progress-bar-item" [style.width]="optionItem.value + '%'" [ngClass]="optionItem.styleClass"  [style.background]="optionItem.color">
 		{{displayValue ? ((optionItem.displayValue !== null && optionItem.displayValue !== undefined) ? optionItem.displayValue : optionItem.value) : '' }}
 	  </div>
 </ng-template>
